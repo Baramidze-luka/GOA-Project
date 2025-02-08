@@ -8,12 +8,13 @@ class Bank():
     # self აღნიშნავს თავის თავს ანუ ბანკს
 
     # Amount : float არის type check რომელიც გადააქცევს მოცემულ არგუმენტს იმ ტიპად რასაც აძლევ
-    # -> bool: აღნიშნავს რომ ფუნქცია დააბრუნებს boolean ტიპს
+    # () -> bool: აღნიშნავს რომ ფუნქცია დააბრუნებს boolean ტიპს
 
     # ფუნქცია აბრუნებს როცა მასში არის გამოყენებული return
 
     # def Deposit(self,Amount : float) -> bool:
     #     return True
+    
     # Answer = Deposit() რომელიც მომცემს True'ს
     # როგორც Input = input() გვაძლევს სტრინგს ეს არის პასუხი return ის გამოყენებით
     
