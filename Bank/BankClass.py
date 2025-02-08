@@ -10,6 +10,12 @@ class Bank():
     # Amount : float არის type check რომელიც გადააქცევს მოცემულ არგუმენტს იმ ტიპად რასაც აძლევ
     # -> bool: აღნიშნავს რომ ფუნქცია დააბრუნებს boolean ტიპს
 
+    # ფუნქცია აბრუნებს როცა მასში არის გამოყენებული return
+
+    # def Deposit(self,Amount : float) -> bool:
+    #     return True
+    # Answer = Deposit() რომელიც მომცემს True'ს
+    
     def Deposit(self,Amount : float) -> bool:
         pass
 
