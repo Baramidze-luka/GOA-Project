@@ -70,3 +70,5 @@ class Account:
     def AddUser(self, name: str, password: str, e_mail: str):
         self.SignUp(name,password,e_mail) # ვიძახებთ signUp ფუნქციას
         self.SaveData()  # ვიძახებთ SaveData ფუნქციას მონაცემების შესანახად
+
+print("S")
