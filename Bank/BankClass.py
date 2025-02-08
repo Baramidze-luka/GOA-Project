@@ -19,8 +19,8 @@ class Bank():
     # Answer = Deposit() რომელიც მომცემს True'ს
     # როგორც Input = input() გვაძლევს სტრინგს ეს არის პასუხი return ის გამოყენებით
     
-    def Deposit(self,Amount : float) -> bool:
+    def Deposit(self,Amount : float):
         pass
 
-    def Withdraw(self,Amount: float) -> bool:
+    def Withdraw(self,Amount: float):
         pass
