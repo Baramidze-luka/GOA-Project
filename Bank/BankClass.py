@@ -8,6 +8,7 @@ class Bank():
     # self აღნიშნავს თავის თავს ანუ ბანკს
 
     # Amount : float არის type check რომელიც გადააქცევს მოცემულ არგუმენტს იმ ტიპად რასაც აძლევ
+    # -> bool: აღნიშნავს რომ ფუნქცია დააბრუნებს boolean ტიპს
 
     def Deposit(self,Amount : float) -> bool:
         pass
