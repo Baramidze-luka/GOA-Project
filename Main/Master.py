@@ -4,5 +4,6 @@ from Bank.BankClass import *
 
 Bank = Bank()
 
-Bank.Deposit(100.0)
+Bank.Deposit(150.0)
 Bank.Withdraw(100.0)
+print(Bank.Balance)
