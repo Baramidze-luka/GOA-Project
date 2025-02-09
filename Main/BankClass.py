@@ -6,7 +6,7 @@ import os
 # JSON ფაილის გზის განსაზღვრა
 PathToFileJson = os.path.join(os.path.dirname(__file__), 'Cards.json')
 
-class Bank:
+class Bank():
     # ბანკის შესაქმნელი ფუნქცია რომელიც გამოიძახება როცა Bank() ფუნქციას გამოიყენებ
     def __init__(self):
         self.Balance = {
@@ -53,7 +53,7 @@ class Bank:
         else:
             print("Error: Invalid bank")
         
-    def Deposit(self, pin: str, CardNum:str,Bank:str, amount: float):
+    def Withdraw(self, pin: str, CardNum:str,Bank:str, amount: float):
         Card = self.Cards[CardNum]
         Bank = self.Balance[Bank]
         if not Card: print("invalid card"); return
@@ -84,7 +84,9 @@ class Bank:
         if not id.isdigit():
             print("Error: Invalid ID")
             return
-        if not fullname.isalpha():
+        # remove spaces and empty characters from name first
+        AlphaName = fullname.replace(" ", "")
+        if not AlphaName.isalpha():
             print("Error: Invalid Name")
             return
         Current = time.localtime()
@@ -128,8 +130,11 @@ class Bank:
             "Limit": Limit,
         }
         self.Cards[CardNum] = card
-        print(f" your card is: {card}")
-
+        print("Your card has been successfully created.")
+        print(f"Card Number: {CardNum}")
+        for i in card:
+            print(f"{i}: {card[i]}")
+        
     def loan(self,):
         print("so, you want to get a loan from us")
 

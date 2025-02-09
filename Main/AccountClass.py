@@ -12,7 +12,16 @@ class Account:
 
     # რეგისტრაციის ფუნქცია, რომელიც იღებს მომხმარებლის სახელს, პაროლს და ელ.ფოსტას
     def SignUp(self, name: str, password: str, e_mail: str) -> str:
-        template = {"password": password, "e_mail": e_mail, "data": {}}  # ეს არის შაბლონი, რომელიც გამოიყენება ახალი მომხმარებლისთვის
+        template = {"password": password, "e_mail": e_mail, "data": {
+            'Balance': {
+            "GOA BANK": 0.0,  # GOA BANK-ის საწყისი ბალანსი
+            "TBC BANK": 0.0,  # TBC BANK-ის საწყისი ბალანსი
+            "GEO BANK": 0.0,  # GEO BANK-ის საწყისი ბალანსი
+            },
+            "Cards": {
+
+            }
+        }}  # ეს არის შაბლონი, რომელიც გამოიყენება ახალი მომხმარებლისთვის
         try:
             # ვხსნით UserData.json ფაილს წასაკითხად
             if not os.path.exists(PathToFileJson):

@@ -1,15 +1,21 @@
 import json
+import sys
+import os
+
+# დავამატოთ ფაილის გზა
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Bank')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Login')))
+
 from BankClass import Bank
 from AccountClass import Account
 
 # დავაიმპორტედ ჩვენი ფაილი რომელიც დევს სხვა ფოლდერში
-
-
+UserBank = Bank()
 
 def Start():
     while True:
         MyAccount = Account()
-        while MyAccount.name == None:
+        while MyAccount.name is None:
             print("Welcome to the Bank!")
             print("1. Log In")
             print("2. Sign Up")
@@ -20,22 +26,22 @@ def Start():
                 Password = input("Enter your password: ")
                 Mail = input("Enter your e-mail: ")
                 Lower = Mail.lower()
-                while ("@gmail.com" or "@mail.ru") not in Lower:
+                while ("@gmail.com" not in Lower) and ("@mail.ru" not in Lower):
                     print("Invalid e-mail! try again")
                     Mail = input("Enter your e-mail: ")
                     Lower = Mail.lower()
-                Answer = MyAccount.LogIn(input("Enter your name: "), input("Enter your password: "), input("Enter your e-mail: "))
+                Answer = MyAccount.LogIn(Name, Password, Mail)
                 print(Answer)
             elif choice == "2":
                 Answer = MyAccount.SignUp(input("Enter your name: "), input("Enter your password: "), input("Enter your e-mail: "))
                 print(Answer)
             elif choice == "3":
-                break
+                return  # გამოვიდეთ პროგრამიდან
             else:
                 print("Invalid choice!")
                 continue
+
         while True:
-            UserBank = Bank()
             if MyAccount.user['data']['Balance']:
                 UserBank.Balance = MyAccount.user['data']['Balance']
             if MyAccount.user['data']['Cards']:
@@ -54,10 +60,16 @@ def Start():
             elif choice == "3":
                 UserBank.SeeBalance(input("Choose a bank: "))
             elif choice == "4":
-                UserBank.createCard()
+                fullname = input("Enter your full name: ")
+                id = input("Enter your ID: ")
+                Bank = input("Choose a bank: ")
+                Limit = float(input("Enter the limit: "))
+                UserBank.createCard(fullname, id, Bank, Limit)
             elif choice == "5":
                 UserBank.loan()
             elif choice == "6":
+                MyAccount['data']['Balance'] = UserBank.Balance
+                MyAccount['data']['Cards'] = UserBank.Cards
                 MyAccount.LogOut()
                 break
             else:
