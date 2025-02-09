@@ -112,3 +112,9 @@ class Bank():
 account = Bank()
 account.Deposit()
 account.Withdraw()
+    
+def Deposit(self,Amount : float,Bank:str):
+        self.Balance[Bank] += Amount
+
+def Withdraw(self,Amount: float,Bank:str):
+        self.Balance[Bank] += Amount
