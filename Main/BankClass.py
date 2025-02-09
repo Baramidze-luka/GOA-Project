@@ -1,6 +1,7 @@
 import time
 import random
 import json
+import os
 
 # JSON ფაილის გზის განსაზღვრა
 PathToFileJson = os.path.join(os.path.dirname(__file__), 'Cards.json')
