@@ -1,6 +1,4 @@
 
-# შექმენი კლასი/ტიპი როგორც int str bool და float.
-# მიანიშნე მას თავისი ფუნქციები
 class Bank():
     # ბანკის შესაქმნელი ფუნქცია რომელიც გამოიძახება როცა Bank() ფუნქციას გამოიყენებ
     def __init__(self):
@@ -50,15 +48,15 @@ class Bank():
             card = input("Which card would you like to top up with: 1.VISA 2.MASTER CARD 3.AMEX:").strip()#რომელი ბარათით სურს თანხის შეტანა
 
             if card == "VISA":
-                count = float(input("How much money do you want to deposit into the account:"))
+                self.balance = float(input("How much money do you want to deposit into the account:"))
                 print("The amount is in the account Thanks for using.")#რა თანხის შემოტანა უნდა მომხმარებელს)
                 break
             elif card == "MASTER CARD":
-                count= float(input("How much money do you want to deposit into the account:"))
+                self.balance = float(input("How much money do you want to deposit into the account:"))
                 print("The amount is in the account Thanks for using.")#რა თანხის შემოტანა უნდა მომხმარებელს)
                 break
             elif card == "AMEX":
-                count= float(input("How much money do you want to deposit into the account:"))
+                self.balance = float(input("How much money do you want to deposit into the account:"))
                 print("The amount is in the account Thanks for using.")#რა თანხის შემოტანა უნდა მომხმარებელს)
                 break
             else:
@@ -68,9 +66,15 @@ class Bank():
         bal = input("Do you want to see your balance?: 1.Yes 2.No:").strip()
         
         if bal == "Yes":
-             print("Your balance is: " + str(count))
+             print("Your balance is: " + str(self.balance))
         else:
              print("Thank you for using our service.")
+
+
+account = Bank()  # შექმენი ბანკის ანგარიში
+account.Deposit()  # დებთ ფუნქციის გამოძახება
+
+
 
 
              
@@ -80,6 +84,6 @@ class Bank():
 
 
 
-    def Withdraw(self,Amount: float):
+def Withdraw(self,Amount: float):
         pass
         
