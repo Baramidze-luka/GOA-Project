@@ -4,7 +4,6 @@ class Account:
     # აქაუნთის შესაქმნელი ფუნქცია რომელიც გამოიძახება როცა Account() ფუნქციას გამოიყენებ
     def __init__(self):
         pass
-
     # რეგისტრაციის ფუნქცია, რომელიც იღებს მომხმარებლის სახელს, პაროლს და ელ.ფოსტას
     def SignUp(self, name: str, password: str, e_mail: str) -> str:
         template = {name: {"password":password,"e_mail":e_mail,"data":{}}}  # ეს არის შაბლონი, რომელიც გამოიყენება ახალი მომხმარებლისთვის
@@ -18,7 +17,7 @@ class Account:
                     with open('UserData.json', 'w') as file:
                         json.dump(users, file, indent=4)  # ვწერთ განახლებულ მონაცემებს JSON ფაილში
                     self.LogIn(name,password,e_mail)  # ვიძახებთ LogIn ფუნქციას ავტორიზაციისთვის
-                    return "Account created successfully"  # ვაბრუნებთ წარმატების შეტყობინებას
+                    return "success"  # ვაბრუნებთ წარმატების შეტყობინებას
                 return "Username Already Exists"  # თუ მომხმარებელი უკვე არსებობს, ვაბრუნებთ შესაბამის შეტყობინებას
         except json.JSONDecodeError:
             return "Error decoding JSON data"  # თუ JSON მონაცემების დეკოდირებისას მოხდა შეცდომა, ვაბრუნებთ შეცდომის შეტყობინებას
@@ -35,7 +34,7 @@ class Account:
                     if user['password'] == password and user['e_mail'] == e_mail:
                         self.name = name  # ვინახავთ მომხმარებლის სახელს
                         self.user = user  # ვინახავთ მომხმარებლის მონაცემებს
-                        return "Login successful"  # ვაბრუნებთ წარმატების შეტყობინებას
+                        return "success"  # ვაბრუნებთ წარმატების შეტყობინებას
                 return "Incorrect Username or Password"  # თუ მონაცემები არ ემთხვევა, ვაბრუნებთ შეცდომის შეტყობინებას
         except FileNotFoundError:
             return "UserData.json file not found"  # თუ ფაილი არ მოიძებნა, ვაბრუნებთ შესაბამის შეტყობინებას
