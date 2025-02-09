@@ -2,7 +2,11 @@
 class Bank():
     # ბანკის შესაქმნელი ფუნქცია რომელიც გამოიძახება როცა Bank() ფუნქციას გამოიყენებ
     def __init__(self):
-        self.Balance = 0.0
+        self.Balance = {
+            "GOABank": 0.0,
+            "TBCBank": 0.0,
+            "BankOfGeorgia": 0.0,
+        }
 
     # self აღნიშნავს თავის თავს ანუ ბანკს
     # წარმოიდგინე self როგორც კომპიუტერის ფაილი რომ მიხვიდე ბალანცის ფაილამდე უნდა ქნა self.Balance
@@ -18,6 +22,7 @@ class Bank():
     # Answer = Deposit() რომელიც მომცემს True'ს
     # როგორც Input = input() გვაძლევს სტრინგს ეს არის პასუხი return ის გამოყენებით
     
+<<<<<<< HEAD
     def Deposit(self):
         pin = input("Create Your Pin:")
                 
@@ -87,3 +92,10 @@ account.Deposit()  # დებთ ფუნქციის გამოძახ
 def Withdraw(self,Amount: float):
         pass
         
+=======
+    def Deposit(self,Amount : float,Bank:str):
+        self.Balance[Bank] += Amount
+
+    def Withdraw(self,Amount: float,Bank:str):
+        self.Balance[Bank] += Amount
+>>>>>>> 3cd617b2f4bb1e740f84724912e2c4f783c553a7
