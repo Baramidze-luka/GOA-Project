@@ -1,3 +1,9 @@
+import time
+import random
+import json
+
+# JSON ფაილის გზის განსაზღვრა
+PathToFileJson = os.path.join(os.path.dirname(__file__), 'Cards.json')
 
 class Bank:
     # ბანკის შესაქმნელი ფუნქცია რომელიც გამოიძახება როცა Bank() ფუნქციას გამოიყენებ
@@ -7,62 +13,118 @@ class Bank:
             "TBC BANK": 0.0,  # TBC BANK-ის საწყისი ბალანსი
             "GEO BANK": 0.0,  # GEO BANK-ის საწყისი ბალანსი
         }
+        self.Cards = {
+
+        }  # ბანკის ბარათები
 
     # self აღნიშნავს თავის თავს ანუ ბანკს
     # წარმოიდგინე self როგორც კომპიუტერის ფაილი რომ მიხვიდე ბალანცის ფაილამდე უნდა ქნა self.Balance
 
     def SeeBalance(self, bank_name: str):
+        if not bank_name in self.Balance:
+            print("Error: Invalid bank")
+            return
         print(f"Your balance is: {self.Balance[bank_name]}")  # ბალანსის ჩვენება
 
-    def Deposit(self, pin: str, bank: str, amount: float):
-        # მომხმარებლის პინის შემოწმება
+    def Deposit(self, pin: str, CardNum: str,CVV: str,Expiration:str, amount: float):
+        Card = self.Cards[CardNum]
+        if not Card: print("invalid card"); return
+        if Card["CVV"] != CVV: print("Incorrect CVV");  return
+        if Card["Expire Date"] != Expiration:  print("Incorrect Expiration Date"); return 
+        if Card["Pin"] != pin: print("Incorrect Pin"); return
 
-        # შეამოწმე მომხმარებლის პინ კოდი თუ სწორია.
-        # ამას მერე დავამატებ
+        if Card["Balance"] < amount: print("Insufficient funds in the card."); return
 
-        # რომელი ბანკის არჩევა უნდა
-        if bank == "1":
-            bank_name = "GOA BANK"
-            print("Welcome to GOA BANK")  # GOA BANK-ში მისალმება
-        elif bank == "2":
-            bank_name = "GEO BANK"
-            print("Welcome to GEO BANK")  # GEO BANK-ში მისალმება
-        elif bank == "3":
-            bank_name = "TBC BANK"
-            print("Welcome to TBC BANK")  # TBC BANK-ში მისალმება
+        if amount > Card["Limit"]: print("Amount exceeds the limit"); return
+
+        if Card["Bank"] == "GOA BANK":
+            Card["Balance"] -= amount
+            self.Balance["GOA BANK"] += amount
+            print(f"{amount} was successfully deposited to GOA BANK.")
+        elif Card["Bank"] == "GEO BANK":
+            Card["Balance"] -= amount
+            self.Balance["GEO BANK"] += amount
+            print(f"{amount} was successfully deposited to GEO BANK.")
+        elif Card["Bank"] == "TBC BANK":
+            Card["Balance"] -= amount
+            self.Balance["TBC BANK"] += amount
+            print(f"{amount} was successfully deposited to TBC BANK.")
         else:
-            print("Error: Invalid bank")  # არასწორი ბანკი
+            print("Error: Invalid bank")
+        
+    def Deposit(self, pin: str, CardNum:str,Bank:str, amount: float):
+        Card = self.Cards[CardNum]
+        Bank = self.Balance[Bank]
+        if not Card: print("invalid card"); return
+        if Card["Pin"] != pin: print("Incorrect Pin"); return
+
+        if Bank < amount: print("Insufficient funds in the Balance."); return
+
+        if Bank == "GOA BANK":
+            Card["Balance"] += amount
+            self.Balance["GOA BANK"] -= amount
+            print(f"{amount} was successfully deposited to GOA BANK.")
+        elif Card["Bank"] == "GEO BANK":
+            Card["Balance"] += amount
+            self.Balance["GEO BANK"] -= amount
+            print(f"{amount} was successfully deposited to GEO BANK.")
+        elif Card["Bank"] == "TBC BANK":
+            Card["Balance"] += amount
+            self.Balance["TBC BANK"] -= amount
+            print(f"{amount} was successfully deposited to TBC BANK.")
+        else:
+            print("Error: Invalid bank")
+        
+
+    def createCard(self,fullname : str, id:str,bank : str,Limit:float):
+        if len(id) != 11:
+            print("Error: Invalid ID")
             return
-
-        # თანხის შეტანა
-        self.Balance[bank_name] += amount
-        print("The amount is in the account. Thanks for using.")  # თანხა შეტანილია ანგარიშზე
-
-    def Withdraw(self, pin: str, bank: str, amount: float):
-        # მომხმარებლის პინის შემოწმება
-
-        # TODO
-        # შეამოწმე მომხმარებლის პინ კოდი თუ სწორია.
-        # ამას მერე დავამატებ
-    
-        # რომელი ბანკიდან სურს თანხის გამოტანა
-        if bank == "1":
-            bank_name = "GOA BANK"
-            print("Welcome to GOA BANK")  # GOA BANK-ში მისალმება
-        elif bank == "2":
-            bank_name = "GEO BANK"
-            print("Welcome to GEO BANK")  # GEO BANK-ში მისალმება
-        elif bank == "3":
-            bank_name = "TBC BANK"
-            print("Welcome to TBC BANK")  # TBC BANK-ში მისალმება
-        else:
-            print("Error: Invalid bank")  # არასწორი ბანკი
+        if not id.isdigit():
+            print("Error: Invalid ID")
             return
+        if not fullname.isalpha():
+            print("Error: Invalid Name")
+            return
+        Current = time.localtime()
+        print(Current)
+        print(Current.tm_year + 3)
 
-        # თანხის გამოტანა
-        if self.Balance[bank_name] >= amount:
-            self.Balance[bank_name] -= amount  # თანხის გამოტანა
-            print(f"{amount} The amount was successfully withdrawn from {bank_name}.")  # თანხის წარმატებული გამოტანა
-        else:
-            print("Insufficient funds in the account.")  # არასაკმარისი თანხა ანგარიშზე
+        CardNum = ""
 
+        for i in range(4):
+            CardNum += str(random.randint(1000, 9999))
+            if i != 3:
+                CardNum += "-"
+        CardExists = False
+        cards = None
+        with open(PathToFileJson, 'r') as file:
+            cards = json.load(file)
+            if CardNum in cards:
+                print("Error: Card already exists")
+                CardExists = True
+                return
+            
+        while CardExists:
+            CardNum = ""
+            for i in range(4):
+                CardNum += str(random.randint(1000, 9999))
+                if i != 3:
+                    CardNum += "-"
+            if CardNum not in cards:
+                CardExists = False
+
+        CVV = str(random.randint(100, 999))
+        Pin = str(random.randint(1000, 9999))
+        card = {
+            "Full Name": fullname,
+            "ID": id,
+            "Expire Date": f"{Current.tm_year + 3}-{Current.tm_mon}-{Current.tm_mday}",
+            "CVV": CVV,
+            "Pin": Pin,
+            "Bank": bank,
+            "Balance": 0.0,
+            "Limit": Limit,
+        }
+        self.Cards[CardNum] = card
+        print(f" your card is: {card}")
