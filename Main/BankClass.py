@@ -128,15 +128,6 @@ class Bank:
         }
         self.Cards[CardNum] = card
         print(f" your card is: {card}")
-            print("Error: Invalid bank")  # არასწორი ბანკი
-            return
-
-        # თანხის გამოტანა
-        if self.Balance[bank_name] >= amount:
-            self.Balance[bank_name] -= amount  # თანხის გამოტანა
-            print(f"{amount} The amount was successfully withdrawn from {bank_name}.")  # თანხის წარმატებული გამოტანა
-        else:
-            print("Insufficient funds in the account.")  # არასაკმარისი თანხა ანგარიშზე
 
     def loan(self,):
         print("so, you want to get a loan from us")
