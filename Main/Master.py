@@ -44,7 +44,8 @@ def Start():
             print("2. Withdraw")
             print("3. Check Balance")
             print("4. Create Card")
-            print("5. Log Out")
+            print("5. Take a Loan")
+            print("6. Log Out")
             choice = input("Choose an option: ")
             if choice == "1":
                 UserBank.Deposit(input("Enter your pin: "), input("Choose a bank: "), float(input("Enter the amount: ")))
@@ -55,6 +56,8 @@ def Start():
             elif choice == "4":
                 UserBank.createCard()
             elif choice == "5":
+                UserBank.loan()
+            elif choice == "6":
                 MyAccount.LogOut()
                 break
             else:
