@@ -66,7 +66,9 @@ class Account:
 
     # აქაუნთიდან გამოსვლა
     def LogOut(self):
-        self = None  # ვანულებთ self-ს, რაც ნიშნავს რომ მომხმარებელი გამოვიდა სისტემიდან
+        self.SaveData()
+        self.name = None
+        self.user = None  # ვანულებთ self-ს, რაც ნიშნავს რომ მომხმარებელი გამოვიდა სისტემიდან
         
     # მონაცემების ჩატვირთვა
     def LoadData(self):
