@@ -11,10 +11,10 @@ from AccountClass import Account
 
 # დავაიმპორტედ ჩვენი ფაილი რომელიც დევს სხვა ფოლდერში
 UserBank = Bank()
+MyAccount = Account()
 
 def Start():
     while True:
-        MyAccount = Account()
         while MyAccount.name is None:
             print("Welcome to the Bank!")
             print("1. Log In")
