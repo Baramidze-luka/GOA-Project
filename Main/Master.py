@@ -71,7 +71,8 @@ def Start():
                 MyAccount['data']['Balance'] = UserBank.Balance
                 MyAccount['data']['Cards'] = UserBank.Cards
                 MyAccount.LogOut()
-                break
+                Start()
+                return
             else:
                 print("Invalid choice!")
                 continue
