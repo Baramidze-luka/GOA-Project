@@ -17,6 +17,9 @@ def autofill_card():
     print("Would you like to autofill card details? If yes, press 1. If no, press 2.")
     choice = input("Choose an option: ")
     if choice == "1":
+        if len(MyAccount.user['data']['AutoFill']['Cards']) == 0:
+            print("There is no card data autofill")
+            return None, None, None
         print("Choose a card: ")
         for i in range(len(MyAccount.user['data']['AutoFill']['Cards'])):
             print(f"{i + 1}. {MyAccount.user['data']['AutoFill']['Cards'][i]}")
@@ -36,8 +39,10 @@ def autofill_personal_data():
     print("Would you like to autofill personal data? If yes, press 1. If no, press 2.")
     choice = input("Choose an option: ")
     if choice == "1":
+        if len(MyAccount.user['data']['AutoFill']['PersonalData']) == 0:
+            print("There is no personal data autofill")
+            return None, None
         print("Choose a personal data entry: ")
-        if len(MyAccount.user['data']['AutoFill']['PersonalData']) == 0: print("there is no personal data autofill"); return None, None
         for i in range(len(MyAccount.user['data']['AutoFill']['PersonalData'])):
             print(f"{i + 1}. {MyAccount.user['data']['AutoFill']['PersonalData'][i]}")
         choice = int(input("Choose an option: "))
@@ -60,6 +65,17 @@ def AccountOption():
         choice = input("Choose an option: ")
         if choice == "1":
             Name = input("Enter your name: ")
+            Password = input("Enter your password: ")
+            Mail = input("Enter your e-mail: ")
+            Lower = Mail.lower()
+            while ("@gmail.com" not in Lower) and ("@mail.ru" not in Lower):
+                print("Invalid e-mail! try again. Email Must contain @gmail.com or @mail.ru")
+                Mail = input("Enter your e-mail: ")
+                Lower = Mail.lower()
+            Answer = MyAccount.LogIn(Name, Password, Mail)
+            print(Answer)
+        elif choice == "2":
+            Name = input("Enter your name: ")
             while len(Name) < 3:
                 print("Name should be at least 3 characters long")
                 Name = input("Enter your name: ")
@@ -67,11 +83,10 @@ def AccountOption():
             while len(Password) < 6:
                 print("Password should be at least 6 characters long")
                 Password = input("Enter your password: ")
-            while "@#$%^&*()_+" not in Password:
+            while not any(char in "@#$%^&*()_+" for char in Password):
                 print("Password should contain at least one special character")
                 Password = input("Enter your password: ")
-                continue
-            while "1234567890" not in Password:
+            while not any(char.isdigit() for char in Password):
                 print("Password should contain at least one number")
                 Password = input("Enter your password: ")
             while not any(char.isupper() for char in Password):
@@ -83,10 +98,7 @@ def AccountOption():
                 print("Invalid e-mail! try again. Email Must contain @gmail.com or @mail.ru")
                 Mail = input("Enter your e-mail: ")
                 Lower = Mail.lower()
-            Answer = MyAccount.LogIn(Name, Password, Mail)
-            print(Answer)
-        elif choice == "2":
-            Answer = MyAccount.SignUp(input("Enter your name: "), input("Enter your password: "), input("Enter your e-mail: "))
+            Answer = MyAccount.SignUp(Name, Password, Mail)
             print(Answer)
         elif choice == "3":
             return  # გამოვიდეთ პროგრამიდან
@@ -141,6 +153,7 @@ def initializeBank():
                 if choice == "1":
                     MyAccount.user['data']['AutoFill']['Cards'].append(Card)
                     MyAccount.user['data']['AutoFill']['PersonalData'].append({"Full Name": fullname, "ID": id})
+                    MyAccount.SaveData()
             elif choice == "5":
                 UserBank.loan()
             elif choice == "6":
@@ -158,3 +171,50 @@ def Start():
     initializeBank()
 
 Start()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

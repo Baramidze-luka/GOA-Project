@@ -34,7 +34,11 @@ class Account:
 
             with open(PathToFileJson, 'r') as file:
                 users = json.load(file)  # ვტვირთავთ მომხმარებლების მონაცემებს JSON ფაილიდან
-                if name not in users:  # ვამოწმებთ, არსებობს თუ არა მომხმარებელი ამ სახელით
+                # ვამოწმებთ, არსებობს თუ არა მომხმარებელი ამ სახელით ან ელ.ფოსტით
+                for user in users.values():
+                    if user['e_mail'] == e_mail:
+                        return "Email Already Exists"  # თუ ელ.ფოსტა უკვე არსებობს, ვაბრუნებთ შესაბამის შეტყობინებას
+                if name not in users:
                     users[name] = template  # თუ არ არსებობს, ვქმნით ახალ მომხმარებელს შაბლონის მიხედვით
                     # ვხსნით UserData.json ფაილს ჩასაწერად
                     with open(PathToFileJson, 'w') as file:
@@ -84,8 +88,18 @@ class Account:
     # მონაცემების შენახვა
     def SaveData(self):
         try:
+            # ვხსნით UserData.json ფაილს წასაკითხად
+            with open(PathToFileJson, 'r') as file:
+                users = json.load(file)  # ვტვირთავთ მომხმარებლების მონაცემებს JSON ფაილიდან
+            # ვამატებთ ან ვაახლებთ მომხმარებლის მონაცემებს
+            users[self.name] = self.user
             # ვხსნით UserData.json ფაილს ჩასაწერად
             with open(PathToFileJson, 'w') as file:
-                json.dump(self.user, file, indent=4)  # ვწერთ მომხმარებლის მონაცემებს JSON ფაილში
+                json.dump(users, file, indent=4)  # ვწერთ განახლებულ მონაცემებს JSON ფაილში
         except Exception as e:
             print(f"An error occurred while saving data: {e}")  # თუ მოხდა შეცდომა, ვბეჭდავთ შეცდომის შეტყობინებას
+
+    # ახალი მომხმარებლის დამატება
+    def AddUser(self, name: str, password: str, e_mail: str):
+        self.SignUp(name, password, e_mail)  # ვიძახებთ SignUp ფუნქციას
+        self.SaveData()  # ვიძახებთ SaveData ფუნქციას მონაცემების შესანახად
