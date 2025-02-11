@@ -2,6 +2,7 @@ import time
 import random
 import json
 import os
+import math
 
 
 def load_json_data(filepath):
@@ -160,45 +161,66 @@ class Bank:
         
         # თუ მომხმარებელმა აირჩია პროგრამირება
         if choice == "1":  
-
-            print("Choose Difficulty")
+            print("Difficulty Doesnt Have Any Tasks, Choose Difficulty")
             print("1. Easy")
             print("2. Medium")
             print("3. Hard")
             difficulty = input("Choose an option: ")
 
+            DifficultyDict = {
+                "1":  "Easy",
+                "2":  "Medium",
+                "3":  "Hard"
+            }
+
             # Load JSON data
             json_data = load_json_data(PathToProgrammingJobJson)
             # Extract inputs for the task
+
+            while len(json_data[(DifficultyDict[difficulty])]) == 0:
+                print("Chosen Difficulty Doesnt Have Any Tasks, Please Choose Another Difficulty")
+                print("1. Easy")
+                print("2. Medium")
+                print("3. Hard")
+                difficulty = input("Choose an option: ")
+
+
+
+            task_key = random.choice(list(json_data[(DifficultyDict[difficulty])].keys()))  # Pick a random key
             
 
-            if difficulty == "1":
-               #Choose random task from json_data['Easy']
-                task_key = random.choice(list(json_data["Easy"].keys()))  # Pick a random key
-                task = json_data["Easy"][task_key]  # Get the corresponding task dictionary
-                print(task_key)
-                print(task['Description'])
-                print(f"Reward {task['Reward']}$")
+            task = json_data[DifficultyDict[difficulty]][task_key]  # Get the corresponding task dictionary
+            print(task_key)
+            print(task['Description'])
+            print(f"Reward {task['Reward']}$")
 
-            
+            print("Tip: If you have to return multiple values return all values in a list")
 
             def Run(Func, *args, expected) -> bool:
+                print(expected)
                 try:
                     result = Func(*args)
-                    if result == expected:
-                        return True
+                    print(result)
+                    if isinstance(expected, list) or isinstance(expected, tuple):
+                        if result == expected:
+                            return True
+                        else:
+                            return False
                     else:
-                        return False
+                        if result == expected:
+                            return True
+                        else:
+                            return False
                 except Exception as e:
                     print("Error:", e)
                     return False
 
             # ვქმნით ფუნქციის შაბლონს, სადაც კოდი ჩაიწერება დინამიურად
-            WholeCode = "def func():\n"  
+            WholeCode = f"def func({task["Input"]}):\n"  
 
             # მომხმარებელს ვეუბნებით, რომ შეუძლია დაამატოს კოდი და "e"-თი დაასრულოს შეყვანა
             print("Type e to end the code")  
-            print("def func():")  
+            print(f"def func({task["Input"]}):")  
 
             # ცვლადი, რომელიც განსაზღვრავს, რამდენი ინტენდაცია (TAB ან 4 space) უნდა იყოს  
             indentation_level = 1  
@@ -231,11 +253,11 @@ class Bank:
 
             # Run the dynamically created function with the provided arguments
 
-            inputs = get_test_case_input(json_data, "Easy", "Return 'Hello World'")
+            inputs = get_test_case_input(json_data, DifficultyDict[difficulty], task_key)
 
             for i in inputs:
-                Answer = Run(func, *i["Input"], expected=i["Output"])
-                if not Answer:
+                Answers = Run(func, *i["Input"], expected=i["Output"])
+                if not Answers:
                     print("You failed the task")
                     print("You will get 10% of the reward")
                     print("Choose Bank To deposit reward")
@@ -247,13 +269,15 @@ class Bank:
                         print("Invalid choice")
                         bank = input("Choose an option: ")
                     if bank == "1":
-                        self.Balance["GOA BANK"] += task['Reward'] * 0.1
+                        reward = task['Reward'] * 0.1
+                        rounded_reward = math.floor(reward * 100) / 100
+                        self.Balance["GOA BANK"] += rounded_reward
                         print(f"{task['Reward'] * 0.1} was successfully deposited to GOA BANK.")
                     elif bank == "2":
-                        self.Balance["TBC BANK"] += task['Reward'] * 0.1
+                        self.Balance["TBC BANK"] += rounded_reward
                         print(f"{task['Reward'] * 0.1} was successfully deposited to TBC BANK.")
                     elif bank == "3":
-                        self.Balance["GEO BANK"] += task['Reward'] * 0.1
+                        self.Balance["GEO BANK"] += rounded_reward
                         print(f"{task['Reward'] * 0.1} was successfully deposited to GEO BANK.")
                     return
                 print("You passed the task")

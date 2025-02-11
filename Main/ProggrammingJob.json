@@ -1,18 +1,40 @@
 {
     "Easy": {
-        "Return 'Hello World'": {
-            "Description": "Return the string 'Hello World'",
-            "Reward": 10,
+        "Return 'Hello World!'": {
+            "Description": "Return the string 'Hello World!'",
+            "Reward": 10.00,
             "TestCases": [
                 {
                     "Input": [], 
-                    "Output": "Hello World"
+                    "Output": "Hello World!"
                 }
             ]
         }
     },
     "Medium": {
-
+        "Find min and max": {
+            "Description": "Implement a function that returns the minimal and the maximal value of a list (in this order).",
+            "Reward": 25.50,
+            "Input" : "List",
+            "TestCases": [
+                {
+                    "Input": [[1]], 
+                    "Output":[1,2]
+                },
+                {
+                    "Input": [[1,2]], 
+                    "Output":[1,2]
+                },
+                {
+                    "Input": [2,1], 
+                    "Output":[1,2]
+                },
+                {
+                    "Input": [4,15,5,6,1], 
+                    "Output":[1,15]
+                }
+            ]
+        }
     },
     "Hard": {
 

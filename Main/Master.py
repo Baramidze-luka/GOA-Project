@@ -172,7 +172,6 @@ def initializeBank():
                 MyAccount.user['data']['Balance'] = UserBank.Balance
                 MyAccount.user['data']['Cards'] = UserBank.Cards
                 MyAccount.LogOut()
-                Start()
                 return
             else:
                 print("Invalid choice!")
