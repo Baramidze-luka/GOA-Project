@@ -137,6 +137,68 @@ class Bank:
         for key, value in card.items():
             print(f"{key}: {value}")
         return card
+    
+    def Work(self):
+        # ეკრანზე გამოვიტანთ შეტყობინებას, რომ მომხმარებელმა აირჩიოს ფულის გამომუშავების მეთოდი
+        print("Choose a way to make money")  
+        print("1. Programming")  
+
+        # მომხმარებელს ვთხოვთ აირჩიოს ვარიანტი
+        choice = input("Choose an option: ")  
+        
+        # თუ მომხმარებელმა აირჩია პროგრამირება
+        if choice == "1":  
+
+            def Run(Func,*args,expected):
+                try:
+                    result = Func(*args)
+                    if result == expected:
+                        print("Correct")
+                    else:
+                        print("Incorrect")
+                except Exception as e:
+                    print("Error:", e)
+
+
+            # ვქმნით ფუნქციის შაბლონს, სადაც კოდი ჩაიწერება დინამიურად
+            WholeCode = "def func():\n"  
+
+            # მომხმარებელს ვეუბნებით, რომ შეუძლია დაამატოს კოდი და "e"-თი დაასრულოს შეყვანა
+            print("Type e to end the code")  
+            print("def func():")  
+
+            # ცვლადი, რომელიც განსაზღვრავს, რამდენი ინტენდაცია (TAB ან 4 space) უნდა იყოს  
+            indentation_level = 1  
+
+            # ციკლი, რომელიც მომხმარებელს აძლევს საშუალებას შეიყვანოს კოდი ხაზი-ხაზად
+            while True:  
+                Line = input("    " * indentation_level)  # მომხმარებლის შეყვანილი კოდი  
+                
+                if Line == "e":  # თუ შეყვანილია "e", ვწყვეტთ კოდის შეყვანას  
+                    break  
+
+                stripped = Line.strip()  # წაშლის ცარიელი ადგილები (whitespace) ხაზის თავში და ბოლოში  
+
+                # თუ ხაზი ბოლოვდება ":", ეს ნიშნავს რომ საჭიროა შიდა ბლოკი (მაგალითად if, for, while, def)
+                if stripped.endswith(":"):  
+                    WholeCode += "    " * indentation_level + Line + "\n"  # ვამატებთ შესაბამის ინტენდაციას  
+                    indentation_level += 1  # ვზრდით ინტენდაციის დონეს, რადგან ახალი ბლოკი გაიხსნა  
+
+                # თუ ხაზი შეიცავს `return`, `pass`, `break`, ან `continue`, ამ დროს ვამატებთ ერთი დონით ნაკლებ ინტენდაციას
+                elif stripped in ["return", "pass", "break", "continue"]:  
+                    indentation_level -= 1
+                    WholeCode += "    " * indentation_level + Line + "\n"  
+
+                # სხვა შემთხვევებში ჩვეულებრივი ინტენდაციით ვამატებთ ხაზს  
+                else:  
+                    WholeCode += "    " * indentation_level + Line + "\n"  
+
+            # ვასრულებთ WholeCode-ის შესრულებას exec ფუნქციით და ვუთითებთ, რომ გლობალურ სივრცეში უნდა შესრულდეს
+            exec(WholeCode, globals()) 
+
+            
+
+
 
     def loan(self):
         print("So, you want to get a loan from us")

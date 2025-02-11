@@ -69,5 +69,22 @@
                 ]
             }
         }
+    },
+    "idkman": {
+        "password": "Idkmanidk@1",
+        "e_mail": "idk@gmail.com",
+        "data": {
+            "Balance": {
+                "GOA BANK": 0.0,
+                "TBC BANK": 0.0,
+                "GEO BANK": 0.0
+            },
+            "Cards": {},
+            "AutoFill": {
+                "Cards": [],
+                "PersonalData": []
+            },
+            "Loans": {}
+        }
     }
 }

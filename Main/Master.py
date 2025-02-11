@@ -117,7 +117,8 @@ def initializeBank():
             print("3. Check Balance")
             print("4. Create Card")
             print("5. Take a Loan")
-            print("6. Log Out")
+            print("6. Miscellaneous")
+            print("7. Log Out")
             choice = input("Choose an option: ")
             if choice == "1":
                 if len(MyAccount.user['data']['AutoFill']['Cards']) > 0:
@@ -157,6 +158,17 @@ def initializeBank():
             elif choice == "5":
                 UserBank.loan()
             elif choice == "6":
+                print("1. Change Password")
+                print("2. Work")
+                print("3. LETS GO GAMBLING")
+                choice = input("Choose an option: ")
+                if choice == "1":
+                    MyAccount.ChangePassword()
+                elif choice == "2":
+                    UserBank.Work()
+                elif choice == "3":
+                    pass
+            elif choice == "7":
                 MyAccount.user['data']['Balance'] = UserBank.Balance
                 MyAccount.user['data']['Cards'] = UserBank.Cards
                 MyAccount.LogOut()
@@ -171,7 +183,6 @@ def Start():
     initializeBank()
 
 Start()
-
 
 
 
