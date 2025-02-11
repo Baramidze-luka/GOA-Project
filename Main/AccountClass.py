@@ -24,7 +24,10 @@ class Account:
             "AutoFill": {
                 'Cards':[],
                 'PersonalData':   [],
-            }
+            },
+            "Loans": {
+                
+            },
         }}  # ეს არის შაბლონი, რომელიც გამოიყენება ახალი მომხმარებლისთვის
         try:
             # ვხსნით UserData.json ფაილს წასაკითხად
