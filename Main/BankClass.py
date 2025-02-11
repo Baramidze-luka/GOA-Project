@@ -3,7 +3,6 @@ import random
 import json
 import os
 
-PathToProgrammingJobJson = os.path.join(os.path.dirname(__file__), 'ProggrammingJob.json')
 
 def load_json_data(filepath):
     with open(filepath, 'r') as file:
@@ -14,6 +13,8 @@ def get_test_case_input(json_data, difficulty, task_name):
 
 # JSON ფაილის გზის განსაზღვრა
 PathToFileJson = os.path.join(os.path.dirname(__file__), 'Cards.json')
+PathToProgrammingJobJson = os.path.join(os.path.dirname(__file__), 'ProggrammingJob.json')
+
 
 class Bank:
     # ბანკის შესაქმნელი ფუნქცია რომელიც გამოიძახება როცა Bank() ფუნქციას გამოიყენებ
@@ -173,8 +174,9 @@ class Bank:
 
             if difficulty == "1":
                #Choose random task from json_data['Easy']
-                task = random.choice(json_data['Easy'])
-                print(task['Name'])
+                task_key = random.choice(list(json_data["Easy"].keys()))  # Pick a random key
+                task = json_data["Easy"][task_key]  # Get the corresponding task dictionary
+                print(task_key)
                 print(task['Description'])
                 print(f"Reward {task['Reward']}$")
 
