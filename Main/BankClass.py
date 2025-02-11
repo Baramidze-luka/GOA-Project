@@ -3,6 +3,15 @@ import random
 import json
 import os
 
+PathToProgrammingJobJson = os.path.join(os.path.dirname(__file__), 'ProggrammingJob.json')
+
+def load_json_data(filepath):
+    with open(filepath, 'r') as file:
+        return json.load(file)
+
+def get_test_case_input(json_data, difficulty, task_name):
+    return json_data[difficulty][task_name]['TestCases']
+
 # JSON ფაილის გზის განსაზღვრა
 PathToFileJson = os.path.join(os.path.dirname(__file__), 'Cards.json')
 
@@ -138,6 +147,8 @@ class Bank:
             print(f"{key}: {value}")
         return card
     
+   
+
     def Work(self):
         # ეკრანზე გამოვიტანთ შეტყობინებას, რომ მომხმარებელმა აირჩიოს ფულის გამომუშავების მეთოდი
         print("Choose a way to make money")  
@@ -149,16 +160,36 @@ class Bank:
         # თუ მომხმარებელმა აირჩია პროგრამირება
         if choice == "1":  
 
-            def Run(Func,*args,expected):
+            print("Choose Difficulty")
+            print("1. Easy")
+            print("2. Medium")
+            print("3. Hard")
+            difficulty = input("Choose an option: ")
+
+            # Load JSON data
+            json_data = load_json_data(PathToProgrammingJobJson)
+            # Extract inputs for the task
+            
+
+            if difficulty == "1":
+               #Choose random task from json_data['Easy']
+                task = random.choice(json_data['Easy'])
+                print(task['Name'])
+                print(task['Description'])
+                print(f"Reward {task['Reward']}$")
+
+            
+
+            def Run(Func, *args, expected) -> bool:
                 try:
                     result = Func(*args)
                     if result == expected:
-                        print("Correct")
+                        return True
                     else:
-                        print("Incorrect")
+                        return False
                 except Exception as e:
                     print("Error:", e)
-
+                    return False
 
             # ვქმნით ფუნქციის შაბლონს, სადაც კოდი ჩაიწერება დინამიურად
             WholeCode = "def func():\n"  
@@ -195,6 +226,57 @@ class Bank:
 
             # ვასრულებთ WholeCode-ის შესრულებას exec ფუნქციით და ვუთითებთ, რომ გლობალურ სივრცეში უნდა შესრულდეს
             exec(WholeCode, globals()) 
+
+            # Run the dynamically created function with the provided arguments
+
+            inputs = get_test_case_input(json_data, "Easy", "Return 'Hello World'")
+
+            for i in inputs:
+                Answer = Run(func, *i["Input"], expected=i["Output"])
+                if not Answer:
+                    print("You failed the task")
+                    print("You will get 10% of the reward")
+                    print("Choose Bank To deposit reward")
+                    print("1. GOA BANK")
+                    print("2. TBC BANK")
+                    print("3. GEO BANK")
+                    bank = input("Choose an option: ")
+                    while bank not in ["1", "2", "3"]:
+                        print("Invalid choice")
+                        bank = input("Choose an option: ")
+                    if bank == "1":
+                        self.Balance["GOA BANK"] += task['Reward'] * 0.1
+                        print(f"{task['Reward'] * 0.1} was successfully deposited to GOA BANK.")
+                    elif bank == "2":
+                        self.Balance["TBC BANK"] += task['Reward'] * 0.1
+                        print(f"{task['Reward'] * 0.1} was successfully deposited to TBC BANK.")
+                    elif bank == "3":
+                        self.Balance["GEO BANK"] += task['Reward'] * 0.1
+                        print(f"{task['Reward'] * 0.1} was successfully deposited to GEO BANK.")
+                    return
+                print("You passed the task")
+                print("You will get the reward")
+                print("Choose Bank To deposit reward")
+                print("1. GOA BANK")
+                print("2. TBC BANK")
+                print("3. GEO BANK")
+                bank = input("Choose an option: ")
+                while bank not in ["1", "2", "3"]:
+                    print("Invalid choice")
+                    bank = input("Choose an option: ")
+                if bank == "1":
+                    self.Balance["GOA BANK"] += task['Reward']
+                    print(f"{task['Reward']} was successfully deposited to GOA BANK.")
+                elif bank == "2":
+                    self.Balance["TBC BANK"] += task['Reward']
+                    print(f"{task['Reward']} was successfully deposited to TBC BANK.")
+                elif bank == "3":
+                    self.Balance["GEO BANK"] += task['Reward']
+                    print(f"{task['Reward']} was successfully deposited to GEO BANK.")
+                    
+
+
+            
 
             
 
