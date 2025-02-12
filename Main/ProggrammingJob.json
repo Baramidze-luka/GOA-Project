@@ -5,6 +5,7 @@
         "Return 'Hello World!'": { 
             "Description": "Return the string 'Hello World!'",
             "Reward": 10.00,
+            "Input" : "",
             "TestCases": [
                 {
                     "Input": [], 
@@ -12,6 +13,34 @@
                 }
             ]
         }
+       "sum of 2 numbers": { 
+            "Description": "Make a function that returns the sum of 2 numbers"
+            "Reward": 15.00,
+            "Input" : "x,y",
+            "TestCases": [
+                {
+                    "Input": [1,2], 
+                    "Output": 3
+                },
+                {
+                    "Input": [6,9], 
+                    "Output": 15
+                },
+                {
+                    "Input": [3,147], 
+                    "Output": 150
+                },
+                {
+                    "Input": [0,0], 
+                    "Output": 0
+                }
+                {
+                    "Input": [3,0], 
+                    "Output": 0
+                }
+            ]
+        }
+       
     },
     "Medium": {
         "Find min and max": {
