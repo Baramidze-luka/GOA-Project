@@ -40,7 +40,6 @@
                 }
             ]
         }
-       
     },
     "Medium": {
         "Find min and max": {
@@ -66,8 +65,42 @@
                 }
             ]
         }
+        "Mirror madness": { 
+            "Description": "Return the given list Mirrored",
+            "Input" : "List"
+            "Reward": 25.00,
+            "TestCases": [
+                {
+                    "Input": [[1,2]], 
+                    "Output": [1,2,2,1]
+                },
+                {
+                    "Input": [[1,2,5,7]], 
+                    "Output": [1,2,5,7,7,5,2,1]
+                },
+                {
+                    "Input": [[2,2,1,2]], 
+                    "Output": [2,2,1,2,2,1,2,2]
+                }
+            ]
+        }
+       
     },
     "Hard": {
-
+       "convert freedom units to normal units": { 
+            "Description": "Given an abbriviation of a string like 'Sugar 1 t' return the measurment in ml. t tsp is teaspoon T Tbsp is tablespoon oz is ounce c is cups and pint is pt"
+            "Input": "String"
+            "Reward": 10.00,
+            "TestCases": [
+                {
+                    "Input": ["Sugar 1 t"], 
+                    "Output": ["Sugar",4.9289]
+                },
+                {
+                    "Input": ["Olive oil 3 Tbps"], 
+                    "Output": ["Olive oil", 44.3603]
+                }
+            ]
+        }
     }
 }
