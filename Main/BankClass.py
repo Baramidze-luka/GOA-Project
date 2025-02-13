@@ -243,8 +243,9 @@ class Bank:
 
                 # თუ ხაზი შეიცავს `return`, `pass`, `break`, ან `continue`, ამ დროს ვამატებთ ერთი დონით ნაკლებ ინტენდაციას
                 elif stripped in ["return", "pass", "break", "continue"] or "return" in Line or "break" in Line or "continue" in Line:  
+                    WholeCode += "    " * indentation_level + Line + "\n"
                     indentation_level -= 1
-                    WholeCode += "    " * indentation_level + Line + "\n"  
+                    WholeCode += "\n"  
 
                 # სხვა შემთხვევებში ჩვეულებრივი ინტენდაციით ვამატებთ ხაზს  
                 else:  
@@ -282,25 +283,25 @@ class Bank:
                         self.Balance["GEO BANK"] += rounded_reward
                         print(f"{task['Reward'] * 0.1} was successfully deposited to GEO BANK.")
                     return
-                print("You passed the task")
-                print("You will get the reward")
-                print("Choose Bank To deposit reward")
-                print("1. GOA BANK")
-                print("2. TBC BANK")
-                print("3. GEO BANK")
+            print("You passed the task")
+            print("You will get the reward")
+            print("Choose Bank To deposit reward")
+            print("1. GOA BANK")
+            print("2. TBC BANK")
+            print("3. GEO BANK")
+            bank = input("Choose an option: ")
+            while bank not in ["1", "2", "3"]:
+                print("Invalid choice")
                 bank = input("Choose an option: ")
-                while bank not in ["1", "2", "3"]:
-                    print("Invalid choice")
-                    bank = input("Choose an option: ")
-                if bank == "1":
-                    self.Balance["GOA BANK"] += task['Reward']
-                    print(f"{task['Reward']} was successfully deposited to GOA BANK.")
-                elif bank == "2":
-                    self.Balance["TBC BANK"] += task['Reward']
-                    print(f"{task['Reward']} was successfully deposited to TBC BANK.")
-                elif bank == "3":
-                    self.Balance["GEO BANK"] += task['Reward']
-                    print(f"{task['Reward']} was successfully deposited to GEO BANK.")
+            if bank == "1":
+                self.Balance["GOA BANK"] += task['Reward']
+                print(f"{task['Reward']} was successfully deposited to GOA BANK.")
+            elif bank == "2":
+                self.Balance["TBC BANK"] += task['Reward']
+                print(f"{task['Reward']} was successfully deposited to TBC BANK.")
+            elif bank == "3":
+                self.Balance["GEO BANK"] += task['Reward']
+                print(f"{task['Reward']} was successfully deposited to GEO BANK.")
 
     def loan(self):
 
