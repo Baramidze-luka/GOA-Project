@@ -74,6 +74,7 @@ def AccountOption():
                 Lower = Mail.lower()
             Answer = MyAccount.LogIn(Name, Password, Mail)
             print(Answer)
+            initializeBank()
         elif choice == "2":
             Name = input("Enter your name: ")
             while len(Name) < 3:
@@ -100,13 +101,15 @@ def AccountOption():
                 Lower = Mail.lower()
             Answer = MyAccount.SignUp(Name, Password, Mail)
             print(Answer)
+            initializeBank()
         elif choice == "3":
-            return  # გამოვიდეთ პროგრამიდან
+            return
         else:
             print("Invalid choice!")
             continue
 
 def initializeBank():
+    if not MyAccount.user: print("Not Logged In"); Start()
     while True:
         if MyAccount.user['data']['Balance']:
             UserBank.Balance = MyAccount.user['data']['Balance']
@@ -157,21 +160,57 @@ def initializeBank():
                     MyAccount.SaveData()
             elif choice == "5":
                 UserBank.loan()
+                MyAccount.user['data']['Loans'] = UserBank.Loans
+                MyAccount.user['data']['Balance'] = UserBank.Balance
+                MyAccount.SaveData()
             elif choice == "6":
                 print("1. Change Password")
                 print("2. Work")
-                print("3. LETS GO GAMBLING")
+                print("3. Pay loan")
                 choice = input("Choose an option: ")
                 if choice == "1":
-                    MyAccount.ChangePassword()
+                    old_password = input("Enter your old password: ")
+                    while len(old_password) < 6:
+                        print("Password should be at least 6 characters long")
+                        old_password = input("Enter your password: ")
+                    while not any(char in "@#$%^&*()_+" for char in old_password):
+                        print("Password should contain at least one special character")
+                        old_password = input("Enter your password: ")
+                    while not any(char.isdigit() for char in old_password):
+                        print("Password should contain at least one number")
+                        old_password = input("Enter your password: ")
+                    while not any(char.isupper() for char in old_password):
+                        print("Password should contain at least one uppercase letter")
+                        old_password = input("Enter your password: ")
+
+                    new_password = input("Enter your New password: ")
+
+                    while len(new_password) < 6:
+                        print("Password should be at least 6 characters long")
+                        new_password = input("Enter your password: ")
+                    while not any(char in "@#$%^&*()_+" for char in new_password):
+                        print("Password should contain at least one special character")
+                        new_password = input("Enter your password: ")
+                    while not any(char.isdigit() for char in new_password):
+                        print("Password should contain at least one number")
+                        new_password = input("Enter your password: ")
+                    while not any(char.isupper() for char in new_password):
+                        print("Password should contain at least one uppercase letter")
+                        new_password = input("Enter your password: ")
+
+                    MyAccount.ChangePassword(old_password,new_password)
                 elif choice == "2":
                     UserBank.Work()
                 elif choice == "3":
-                    pass
+                    UserBank.PayLoan()
+                    MyAccount['data']['Balance'] = UserBank.Balance
+                    MyAccount['data']['Loans'] = UserBank.Loans
+                    MyAccount.SaveData()
             elif choice == "7":
                 MyAccount.user['data']['Balance'] = UserBank.Balance
                 MyAccount.user['data']['Cards'] = UserBank.Cards
                 MyAccount.LogOut()
+                Start()
                 return
             else:
                 print("Invalid choice!")
@@ -179,7 +218,6 @@ def initializeBank():
 
 def Start():
     AccountOption()
-    initializeBank()
 
 Start()
 

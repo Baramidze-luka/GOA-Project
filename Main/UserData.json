@@ -1,10 +1,10 @@
 {
-    "giorgi": {
+    "gioMagari": {
         "password": "Idksomething@1",
         "e_mail": "giorgi@gmail.com",
         "data": {
             "Balance": {
-                "GOA BANK": 12.75,
+                "GOA BANK": 300.0,
                 "TBC BANK": 0.0,
                 "GEO BANK": 0.0
             },
@@ -13,7 +13,13 @@
                 "Cards": [],
                 "PersonalData": []
             },
-            "Loans": {}
+            "Loans": [
+                {
+                    "Type": "consumer loan",
+                    "amount": 360,
+                    "years": 1
+                }
+            ]
         }
     }
 }

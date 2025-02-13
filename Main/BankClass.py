@@ -26,20 +26,22 @@ class Bank:
             "GEO BANK": 0.0,  # GEO BANK-ის საწყისი ბალანსი
         }
         self.Cards = {}  # ბანკის ბარათები
-        self.Loans = {
+        self.Loans = [
             
-        }
+        ]
 
     # self აღნიშნავს თავის თავს ანუ ბანკს
     # წარმოიდგინე self როგორც კომპიუტერის ფაილი რომ მიხვიდე ბალანცის ფაილამდე უნდა ქნა self.Balance
 
     def SeeBalance(self, bank_name: str):
+        bank_name.upper()
         if bank_name not in self.Balance:
             print("Error: Invalid bank")
             return
         print(f"Your balance is: {self.Balance[bank_name]}")  # ბალანსის ჩვენება
 
     def Deposit(self, pin: str, CardNum: str, CVV: str, Expiration: str,Bank:str, amount: float):
+        Bank.upper()
         Card = self.Cards.get(CardNum)
         if not Card:
             print("Invalid card")
@@ -76,6 +78,7 @@ class Bank:
             print("Error: Invalid bank")
 
     def Withdraw(self, pin: str, CardNum: str, Bank: str, amount: float):
+        Bank.upper()
         Card = self.Cards.get(CardNum)
         if not Card:
             print("Invalid card")
@@ -103,6 +106,7 @@ class Bank:
             print("Error: Invalid bank")
 
     def createCard(self, fullname: str, id: str, bank: str, Limit: float) -> dict:
+        bank.upper()
         if len(id) != 11 or not id.isdigit():
             print("Error: Invalid ID")
             return
@@ -149,8 +153,6 @@ class Bank:
             print(f"{key}: {value}")
         return card
     
-   
-
     def Work(self):
         # ეკრანზე გამოვიტანთ შეტყობინებას, რომ მომხმარებელმა აირჩიოს ფულის გამომუშავების მეთოდი
         print("Choose a way to make money")  
@@ -299,21 +301,15 @@ class Bank:
                 elif bank == "3":
                     self.Balance["GEO BANK"] += task['Reward']
                     print(f"{task['Reward']} was successfully deposited to GEO BANK.")
-                    
-
-
-            
-
-            
-
-
 
     def loan(self):
+
+    
         print("So, you want to get a loan from us")
-        bank = input("Which bank would you like to get a loan from? ").capitalize()
+        bank = input("Which bank would you like to get a loan from? ").upper()
         while bank not in self.Balance:
             print("Sorry, we only support GOA, TBC, and GEO banks")
-            bank = input("Which bank would you like to get a loan from? ").capitalize()
+            bank = input("Which bank would you like to get a loan from? ").upper()
 
         loan_type = input("Would you like a Consumer loan, Car loan, or Business loan? ").lower()
         while loan_type not in ["consumer loan", "car loan", "business loan"]:
@@ -362,10 +358,17 @@ class Bank:
                 elif 50000 < amount <= 500000:
                     annual_rate = 0.04  # წლიური განაკვეთი 4%
 
+            Total = int(amount * (1 + annual_rate))
+            
             print(f"თქვენ გნებავთ {amount} ლარის გატანა {years} წლით. "
                   f"თქვენი წლიური გადასახადი იქნება {int(amount / years * (1 + annual_rate))}. "
                   f"თვიურად მოგიწევთ {int(amount / years * (1 + annual_rate) / 12)}. "
-                  f"სულ მოგიწევთ {int(amount * (1 + annual_rate))} ლარის გადახდა.")
+                  f"სულ მოგიწევთ {Total} ლარის გადახდა.")
+            
+          
+            
+            self.Loans.append({"Type": loan_type, "amount": Total, "years": years})
+            self.Balance[bank] += amount
 
         elif loan_type == "car loan":
             print("You have chosen a car loan")
@@ -421,10 +424,16 @@ class Bank:
                 elif 500000 < amount <= 5000000:
                     annual_rate = 0.15  # წლიური განაკვეთი 15%
 
+            Total = int(amount * (1 + annual_rate))
+
+            
             print(f"თქვენ გნებავთ {amount} ლარის გატანა {years} წლით. "
                   f"თქვენი წლიური გადასახადი იქნება {int(amount / years * (1 + annual_rate))}. "
                   f"თვიურად მოგიწევთ {int(amount / years * (1 + annual_rate) / 12)}. "
-                  f"სულ მოგიწევთ {int(amount * (1 + annual_rate))} ლარის გადახდა.")
+                  f"სულ მოგიწევთ {Total} ლარის გადახდა.")
+            
+            self.Loans.append({"Type": loan_type, "amount": Total, "years": years})
+            self.Balance[bank] += amount
 
         elif loan_type == "business loan":
             print("You have chosen a business loan")
@@ -468,8 +477,51 @@ class Bank:
                     annual_rate = 0.40  # წლიური განაკვეთი 40%
                 elif 500000000 < amount <= 5000000000:
                     annual_rate = 0.32  # წლიური განაკვეთი 32%
+            
+            Total = int(amount * (1 + annual_rate))
 
             print(f"თქვენ გნებავთ {amount} ლარის გატანა {years} წლით. "
                   f"თქვენი წლიური გადასახადი იქნება {int(amount / years * (1 + annual_rate))}. "
                   f"თვიურად მოგიწევთ {int(amount / years * (1 + annual_rate) / 12)}. "
-                  f"სულ მოგიწევთ {int(amount * (1 + annual_rate))} ლარის გადახდა.")
+                  f"სულ მოგიწევთ {Total} ლარის გადახდა.")
+            
+            self.Loans.append({"Type": loan_type, "amount": Total, "years": years})
+            self.Balance[bank] += amount
+           
+        print(self.Loans)
+
+    def PayLoan(self):
+        print("Which loan woud you like to pay?")
+        
+        for i in range(len(self.Loans)):
+            print(f"{i + 1}.{self.Loans[i]}")
+        
+        Choice = int(input("Choose Loan To pay off")) - 1
+
+        if self.Loans[Choice]:
+            Loan = self.Loans[Choice]
+            print("How Much Woud You like to pay off")
+            try:
+                Amount = int(input("Enter The amount: "))
+            except ValueError as e:
+                print(e,"Not a valid integer")
+            print("1. GOA BANK")
+            print("2. TBC BANK")
+            print("3. GEO BANK")
+            Bank = input("Enter The bank you are going to be paying from: ").upper()
+
+            while Bank not in self.Balance:
+                print("Sorry we only support, Goa Bank, Tbc Bank and Geo Bank. Please enter again")
+                Bank = input("Enter The bank you are going to be paying from: ").upper()
+
+            while self.Balance[Bank] < Amount:
+                print("not enough balance")
+                try:
+                    Amount = int(input("Enter The amount: "))
+                except ValueError as e:
+                    print(e,"Not a valid integer")
+            
+            self.Balance[Bank] -= Amount
+            Loan['amount'] -= Amount
+
+
