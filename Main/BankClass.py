@@ -242,7 +242,7 @@ class Bank:
                     indentation_level += 1  # ვზრდით ინტენდაციის დონეს, რადგან ახალი ბლოკი გაიხსნა  
 
                 # თუ ხაზი შეიცავს `return`, `pass`, `break`, ან `continue`, ამ დროს ვამატებთ ერთი დონით ნაკლებ ინტენდაციას
-                elif stripped in ["return", "pass", "break", "continue"]:  
+                elif stripped in ["return", "pass", "break", "continue"] or "return" in Line or "break" in Line or "continue" in Line:  
                     indentation_level -= 1
                     WholeCode += "    " * indentation_level + Line + "\n"  
 
