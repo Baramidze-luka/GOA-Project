@@ -4,7 +4,7 @@
     "Easy": {
         "Return 'Hello World!'": { 
             "Description": "Return the string 'Hello World!'",
-            "Reward": 10.00,
+            "Reward": 100.00,
             "Input" : "",
             "TestCases": [
                 {
@@ -12,10 +12,10 @@
                     "Output": "Hello World!"
                 }
             ]
-        }
+        },
        "sum of 2 numbers": { 
-            "Description": "Make a function that returns the sum of 2 numbers"
-            "Reward": 15.00,
+            "Description": "Make a function that returns the sum of 2 numbers",
+            "Reward": 350.00,
             "Input" : "x,y",
             "TestCases": [
                 {
@@ -33,7 +33,7 @@
                 {
                     "Input": [0,0], 
                     "Output": 0
-                }
+                },
                 {
                     "Input": [3,0], 
                     "Output": 0
@@ -44,7 +44,7 @@
     "Medium": {
         "Find min and max": {
             "Description": "Implement a function that returns the minimal and the maximal value of a list (in this order).",
-            "Reward": 25.50,
+            "Reward": 550.50,
             "Input" : "List",
             "TestCases": [
                 {
@@ -64,11 +64,11 @@
                     "Output":[1,15]
                 }
             ]
-        }
+        },
         "Mirror madness": { 
             "Description": "Return the given list Mirrored",
-            "Input" : "List"
-            "Reward": 25.00,
+            "Input" : "List",
+            "Reward": 750.00,
             "TestCases": [
                 {
                     "Input": [[1,2]], 
@@ -84,13 +84,12 @@
                 }
             ]
         }
-       
     },
     "Hard": {
        "convert freedom units to normal units": { 
-            "Description": "Given an abbriviation of a string like 'Sugar 1 t' return the measurment in ml. t tsp is teaspoon T Tbsp is tablespoon oz is ounce c is cups and pint is pt"
-            "Input": "String"
-            "Reward": 10.00,
+            "Description": "Given an abbriviation of a string like 'Sugar 1 t' return the measurment in ml. t tsp is teaspoon T Tbsp is tablespoon oz is ounce c is cups and pint is pt",
+            "Input": "String",
+            "Reward": 1000.00,
             "TestCases": [
                 {
                     "Input": ["Sugar 1 t"], 
