@@ -41,6 +41,9 @@ class Bank:
         print(f"Your balance is: {self.Balance[bank_name]}")  # ბალანსის ჩვენება
 
     def Deposit(self, pin: str, CardNum: str, CVV: str, Expiration: str,Bank:str, amount: float):
+        if amount <= 0:
+            print("Invalid amount")
+            return
         Bank.upper()
         Card = self.Cards.get(CardNum)
         if not Card:
@@ -78,6 +81,9 @@ class Bank:
             print("Error: Invalid bank")
 
     def Withdraw(self, pin: str, CardNum: str, Bank: str, amount: float):
+        if amount <= 0:
+            print("Invalid amount")
+            return
         Bank.upper()
         Card = self.Cards.get(CardNum)
         if not Card:
