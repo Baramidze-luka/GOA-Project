@@ -121,7 +121,7 @@ class Bank:
             CardNum += str(random.randint(1000, 9999))
             if i != 3:
                 CardNum += "-"
-
+        cards = None
         with open(PathToFileJson, 'r') as file:
             cards = json.load(file)
             while CardNum in cards:

@@ -203,8 +203,8 @@ def initializeBank():
                     UserBank.Work()
                 elif choice == "3":
                     UserBank.PayLoan()
-                    MyAccount['data']['Balance'] = UserBank.Balance
-                    MyAccount['data']['Loans'] = UserBank.Loans
+                    MyAccount.user['data']['Balance'] = UserBank.Balance
+                    MyAccount.user['data']['Loans'] = UserBank.Loans
                     MyAccount.SaveData()
             elif choice == "7":
                 MyAccount.user['data']['Balance'] = UserBank.Balance
