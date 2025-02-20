@@ -1,62 +1,19 @@
 {
     "giorgi": {
-        "password": "SuperSecurePassword_123",
+        "password": "Idksomething@1",
         "e_mail": "giorgi@gmail.com",
         "data": {
             "Balance": {
-                "GOA BANK": 10050.0,
+                "GOA BANK": 0.0,
                 "TBC BANK": 0.0,
                 "GEO BANK": 0.0
             },
             "Cards": {},
             "AutoFill": {
-                "Cards": [
-                    null,
-                    {
-                        "Full Name": "giorgi tedozashvili",
-                        "ID": "12345678910",
-                        "Expire Date": "2028-2-13",
-                        "CVV": "994",
-                        "Pin": "5352",
-                        "Bank": "GOA BANK",
-                        "Balance": 0.0,
-                        "Limit": 1000.0,
-                        "Card Number": "6099-1781-4813-1704"
-                    },
-                    {
-                        "Full Name": "giorgi tedozashvili",
-                        "ID": "12345678910",
-                        "Expire Date": "2028-2-13",
-                        "CVV": "851",
-                        "Pin": "8275",
-                        "Bank": "GOA BANK",
-                        "Balance": 50.0,
-                        "Limit": 1000.0,
-                        "Card Number": "1477-4965-6935-2121"
-                    }
-                ],
-                "PersonalData": [
-                    {
-                        "Full Name": "giorgi tedozashvili",
-                        "ID": "1234567"
-                    },
-                    {
-                        "Full Name": "giorgi tedozashvili",
-                        "ID": "12345678910"
-                    },
-                    {
-                        "Full Name": "giorgi tedozashvili",
-                        "ID": "12345678910"
-                    }
-                ]
+                "Cards": [],
+                "PersonalData": []
             },
-            "Loans": [
-                {
-                    "Type": "consumer loan",
-                    "amount": 10900,
-                    "years": 5
-                }
-            ]
+            "Loans": []
         }
     }
 }

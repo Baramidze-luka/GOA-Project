@@ -21,9 +21,14 @@ def autofill_card():
             print("There is no card data autofill")
             return None, None, None
         print("Choose a card: ")
+        finalindex = 0
         for i in range(len(MyAccount.user['data']['AutoFill']['Cards'])):
             print(f"{i + 1}. {MyAccount.user['data']['AutoFill']['Cards'][i]}")
+            finalindex = i + 1
+        print(f"{finalindex + 1} Exit")
         choice = int(input("Choose an option: "))
+        if choice == str(finalindex):
+            return None, None , None
         Card = MyAccount.user['data']['AutoFill']['Cards'][choice - 1]
         Num = Card["Card Number"]
         ExpireDate = Card["Expire Date"]
@@ -43,9 +48,14 @@ def autofill_personal_data():
             print("There is no personal data autofill")
             return None, None
         print("Choose a personal data entry: ")
+        finalindex = 0
         for i in range(len(MyAccount.user['data']['AutoFill']['PersonalData'])):
             print(f"{i + 1}. {MyAccount.user['data']['AutoFill']['PersonalData'][i]}")
+            finalindex = i + 1
+        print(f"{finalindex + 1} Exit")
         choice = int(input("Choose an option: "))
+        if choice == str(finalindex):
+            return None, None , None
         PersonalData = MyAccount.user['data']['AutoFill']['PersonalData'][choice - 1]
         fullname = PersonalData["Full Name"]
         id = PersonalData["ID"]
@@ -247,6 +257,142 @@ Start()
 
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

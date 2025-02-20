@@ -138,12 +138,7 @@ class Bank:
                     if i != 3:
                         CardNum += "-"
 
-        cards[CardNum] = CardNum
-        try:
-            with open(PathToFileJson, 'w') as file:
-                json.dump(cards, file, indent=4) 
-        except Exception as e:
-            print(f"An error occurred while saving data: {e}") 
+       
         CVV = str(random.randint(100, 999))
         Pin = str(random.randint(1000, 9999))
         card = {
@@ -157,6 +152,12 @@ class Bank:
             "Limit": Limit,
             "Card Number": CardNum,
         }
+        cards[CardNum] = card
+        try:
+            with open(PathToFileJson, 'w') as file:
+                json.dump(cards, file, indent=4) 
+        except Exception as e:
+            print(f"An error occurred while saving data: {e}") 
         self.Cards[CardNum] = card
         print("Your card has been successfully created.")
         print(f"Card Number: {CardNum}")
