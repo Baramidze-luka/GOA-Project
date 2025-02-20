@@ -99,8 +99,6 @@ class Account:
 
     # მონაცემების შენახვა
     def SaveData(self):
-
-    
         try:
             # ვხსნით UserData.json ფაილს წასაკითხად
             with open(PathToFileJson, 'r') as file:

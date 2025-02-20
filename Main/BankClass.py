@@ -139,6 +139,11 @@ class Bank:
                         CardNum += "-"
 
         cards[CardNum] = CardNum
+        try:
+            with open(PathToFileJson, 'w') as file:
+                json.dump(cards, file, indent=4) 
+        except Exception as e:
+            print(f"An error occurred while saving data: {e}") 
         CVV = str(random.randint(100, 999))
         Pin = str(random.randint(1000, 9999))
         card = {
